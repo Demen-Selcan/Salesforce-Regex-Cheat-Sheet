@@ -221,8 +221,10 @@ Example: 4111 1111 1111 1111 instead of 4111-1111-1111-1111
 	
 This expression validates dates in the ITALIAN d/m/y format from 1/1/1600 - 31/12/9999. The days are validated for the given month and year. Leap years are validated for all 4 digits years from 1600-9999, and all 2 digits years except 00 since it could be any century (1900, 2000, 2100). Days and months must be 1 or 2 digits and may have leading zeros. Years must be 2 or 4 digit years. 4 digit years must be between 1600 and 9999. Date separator may be a slash (/), dash (-), or period (.)
 
-Allowed Values: 29/02/1972 | 5-9-98 | 10-11-2002 <br/>
-Non-Allowed Values: 29/02/2003 (non leap year) | 12/13/2002 | 1-1-1500 <br/>
+```diff
++ Allowed Values: 29/02/1972 | 5-9-98 | 10-11-2002
+- Non-Allowed Values: 29/02/2003 (non leap year) | 12/13/2002 | 1-1-1500
+```
 
 ```javascript
 ^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$
@@ -235,8 +237,10 @@ Non-Allowed Values: 29/02/2003 (non leap year) | 12/13/2002 | 1-1-1500 <br/>
 	
 MM/dd/yyyy with leap years. Valid since year 1900. MM and DD could have 1 or 2 digits : M/d/yyyy or MM/d/yyyy or M/dd/yyy
 
-Allowed Values: 01/31/1905 | 1/9/1900 | 2/29/1904 <br/>
-Non-Allowed Values: 31/01/2005 | 02/29/2005 | 2/29/2005 <br/>
+```diff
++ Allowed Values: 01/31/1905 | 1/9/1900 | 2/29/1904
+- Non-Allowed Values: 31/01/2005 | 02/29/2005 | 2/29/2005
+```
 
 ```javascript
 ^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$
