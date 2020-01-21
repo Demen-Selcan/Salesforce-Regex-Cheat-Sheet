@@ -1,3 +1,5 @@
+# WORK IN PROGRESS 
+
 # Salesforce Regex Cheat Sheet
 
 I believe that RegEx functions are one of the most undervalued features in Salesforce. While common amongst developers, it is less popular for functional folks. One reason for that could be the cryptic nature of RegEx formulas, which might scare people away. I am hoping that this cheat sheet will help to use RegEx formulas in your day to day activies and allow you to build more robust validations.
@@ -119,7 +121,18 @@ You can test your RegEx formulas via websites for example: [RegExTesting](https:
   <summary>Belgium</summary>
 
 ```javascript
-^[1-9]{1}[0-9]{3}$
+/* This formula allows 1 numeric value between 1-9 followed by 3 numberic values from 0-9. */
+
+!REGEX(YOUR_FIELD_TO_BE_VALIDATED , '^[1-9]{1}[0-9]{3}$')
+```
+
+## Example:
+
+```javascript
+/* This formula allows 1 numeric value between 1-9 followed by 3 numberic values from 0-9. */
+
+TEXT(MailingCountryCode) == 'BE' &&
+  !REGEX(Belgic_Postal_Code__c , '^[1-9]{1}[0-9]{3}$')
 ```
 
 </details>
@@ -128,25 +141,26 @@ You can test your RegEx formulas via websites for example: [RegExTesting](https:
 
 [Source](http://regexlib.com/Search.aspx?k=zip&c=-1&m=-1&ps=20)
 
-The below expression checks for 5 numeric values, followed by a hyphen and 4 additional numeric values. Example: 22223-3443.
-
 <details>
   <summary>Zip+4</summary>
 
+The below expression checks for 5 numeric values, followed by a hyphen and 4 additional numeric values. Example: 22223-3443.
+
 ```javascript
-^\d{5}-\d{4}$
+/* This formula allows 5 numeric values, followed by a hyphen and 4 additional numeric values. Example: 22223-3443.*/
+
+!REGEX(YOUR_FIELD_TO_BE_VALIDATED , '^([0-9]{5})+(-[0-9]{4})+$')
+```
+
+## Example:
+
+```javascript
+/* This formula allows 5 numeric values, followed by a hyphen and 4 additional numeric values. Example: 22223-3443.*/
+
+!REGEX(Billing_Address_Postal_Code__c , '^([0-9]{5})+(-[0-9]{4})+$')
 ```
 
 </details>
-
-The below expression works the same way as the Zip+4 function above but disallows zeros. Example of a disallowed value: 00000-0000.
-
-<details>
-  <summary>Zip+4 without 0 </summary>
-
-```javascript
-^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$
-```
 
 </details>
 
@@ -157,23 +171,31 @@ The below expression works the same way as the Zip+4 function above but disallow
 -   Visa : 13 or 16 digits, starting with 4.
 -   MasterCard : 16 digits, starting with 51 through 55.
 -   American Express : 15 digits, starting with 34 or 37.
--   Discover : 16 digits, starting with 6011 or 65.
--   JCB : 15 digits, starting with 2131 or 1800, or 16 digits starting with 35.
 
 ---
 
 **Note**
 
-The below regex formulas assume the credit card numbers without any special characters like hyphens (-).
-Example: 4111 1111 1111 1111 instead of 4111-1111-1111-1111
+The below regex formulas assumes the credit card numbers without any special characters like hyphens (-).
+Example: 4111111111111111 instead of 4111-1111-1111-1111 or 4111 1111 1111 1111
 
 ---
+
+### Example Implementation: YOUTUBE LINK TO BE POSTED HERE
 
 <details>
   <summary>Visa</summary>
 
 ```javascript
-^4[0-9]{12}(?:[0-9]{3})?$
+//This formula allows no special characters or spaces.
+!REGEX(YOUR_FIELD_TO_BE_VALIDATED, '^4[0-9]{12}(?:[0-9]{3})?$');
+```
+
+### Example:
+
+```javascript
+//This formula allows no special characters or spaces.
+!REGEX(Credit_Card__c, '^4[0-9]{12}(?:[0-9]{3})?$');
 ```
 
 </details>
@@ -182,7 +204,21 @@ Example: 4111 1111 1111 1111 instead of 4111-1111-1111-1111
   <summary>MasterCard</summary>
 
 ```javascript
-^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$
+//This formula allows no special characters or spaces.
+!REGEX(
+    YOUR_FIELD_TO_BE_VALIDATED,
+    '^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$'
+)
+```
+
+### Example:
+
+```javascript
+//This formula allows no special characters or spaces.
+!REGEX(
+    Credit_Card__c,
+    '^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$'
+)
 ```
 
 </details>
@@ -191,30 +227,27 @@ Example: 4111 1111 1111 1111 instead of 4111-1111-1111-1111
   <summary>American Express</summary>
 
 ```javascript
-^3[47][0-9]{13}$
+//This formula allows no special characters or spaces.
+!REGEX(
+    YOUR_FIELD_TO_BE_VALIDATED,
+    '^3[47][0-9]{13}$'
+)
 ```
 
-</details>
-
-<details>
-  <summary>Discover</summary>
+### Example:
 
 ```javascript
-^6(?:011|5[0-9]{2})[0-9]{12}$
+//This formula allows no special characters or spaces.
+!REGEX(
+    Credit_Card__c,
+    '^3[47][0-9]{13}$'
+)
 ```
 
 </details>
 
-<details>
-  <summary>JCB</summary>
 
-```javascript
-^(?:2131|1800|35\d{3})\d{11}$
-```
-
-</details>
-
-# <img src="img/calendar.png" alt="calendar icon" width="50"/> Date Validations
+# <img src="img/calendar.png" alt="calendar icon" width="50" target="_blank"/> Date Validations
 
 <details>
   <summary>EU Date Notation dd/mm/yy or d/m/y or dd/mm/yyy </summary>
@@ -226,11 +259,17 @@ This expression validates dates in the ITALIAN d/m/y format from 1/1/1600 - 31/1
 - Non-Allowed Values: 29/02/2003 (non leap year) | 12/13/2002 | 1-1-1500
 ```
 
-```javascript
-^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$
+```java
+//This formula allows no special characters or spaces.
+!REGEX(
+    Date__c,
+    '^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$'
+)
 ```
 
 </details>
+
+
 
 <details>
   <summary>US Date Notation mm/dd/yy or m/d/y or dd/mm/yyy </summary>
@@ -243,7 +282,7 @@ MM/dd/yyyy with leap years. Valid since year 1900. MM and DD could have 1 or 2 d
 ```
 
 ```javascript
-^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$
+'^(((0?[1-9]|1[012])/(0?[1-9]|1\d|2[0-8])|(0?[13456789]|1[012])/(29|30)|(0?[13578]|1[02])/31)/(19|[2-9]\d)\d{2}|0?2/29/((19|[2-9]\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$'
 ```
 
 </details>
