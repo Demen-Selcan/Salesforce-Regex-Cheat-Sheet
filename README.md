@@ -10,9 +10,7 @@ A regular expresion (RegEx in short), is a sequence of characters that helps sea
 
 You can test your RegEx formulas via websites for example: [RegExTesting](https://www.regextester.com)
 
-# Postal Code Validation
-
-<img src="img/postalCode.png" alt="calendar icon" width="50"/>
+# <img src="img/postalCode.png" alt="calendar icon" width="50"/> Postal Code Validation
 
 ## Country Validations
 
@@ -152,9 +150,7 @@ The below expression works the same way as the Zip+4 function above but disallow
 
 </details>
 
-# Credit Card Validations
-
-<img src="img/creditCard.png" alt="calendar icon" width="50"/>
+# <img src="img/creditCard.png" alt="calendar icon" width="50"/> Credit Card Validations
 
 [Source](https://www.validcreditcardnumber.com/)
 
@@ -218,9 +214,7 @@ Example: 4111 1111 1111 1111 instead of 4111-1111-1111-1111
 
 </details>
 
-# Date Validations
-
-<img src="img/calendar.png" alt="calendar icon" width="50"/>
+# <img src="img/calendar.png" alt="calendar icon" width="50"/> Date Validations
 
 <details>
   <summary>EU Date Notation dd/mm/yy or d/m/y or dd/mm/yyy </summary>
